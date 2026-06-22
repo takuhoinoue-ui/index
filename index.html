@@ -6,7 +6,6 @@
 <title>法令遵守週報</title>
 <script src="https://alcdn.msauth.net/browser/2.38.3/js/msal-browser.min.js"></script>
 <style>
-/* ── トークン ── */
 :root {
   --c-bg:        #F0F0F8;
   --c-surface:   #FFFFFF;
@@ -41,7 +40,6 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── ヘッダー ── */
 .app-bar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: var(--c-primary);
@@ -72,7 +70,6 @@ html, body {
 }
 .app-bar .btn-auth:hover { background: rgba(255,255,255,.15); }
 
-/* ── プログレスバー ── */
 .progress-wrap {
   position: fixed; top: 52px; left: 0; right: 0; z-index: 99;
   background: var(--c-primary-d);
@@ -111,9 +108,8 @@ html, body {
 }
 .step-connector.done { background: rgba(255,255,255,.45); }
 
-/* ── メインビュー ── */
 .view-port {
-  margin-top: 116px; /* appbar + progress */
+  margin-top: 116px;
   padding: 20px 16px 120px;
   max-width: 560px;
   margin-left: auto; margin-right: auto;
@@ -121,7 +117,6 @@ html, body {
   overflow: hidden;
 }
 
-/* ── ステップパネル ── */
 .step-panel {
   display: none;
   animation: none;
@@ -137,7 +132,6 @@ html, body {
 @keyframes slideOutR { from { opacity:1; transform:translateX(0); } to { opacity:0; transform:translateX(32px);  } }
 @keyframes slideOutL { from { opacity:1; transform:translateX(0); } to { opacity:0; transform:translateX(-32px); } }
 
-/* ── セクションヘッダー ── */
 .section-head {
   display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
 }
@@ -153,7 +147,6 @@ html, body {
 .section-title h2 { font-size: 16px; font-weight: 700; }
 .section-title p  { font-size: 12px; color: var(--c-sub); margin-top: 2px; }
 
-/* ── カード ── */
 .card {
   background: var(--c-surface);
   border-radius: var(--radius-md);
@@ -178,7 +171,6 @@ html, body {
   letter-spacing: 0;
 }
 
-/* ── フォーム要素 ── */
 .field { margin-bottom: 14px; }
 .field:last-child { margin-bottom: 0; }
 .field label {
@@ -201,16 +193,20 @@ input:focus, select:focus, textarea:focus {
   border-color: var(--c-primary);
   box-shadow: 0 0 0 3px rgba(0,0,96,.12);
 }
+input[readonly] {
+  background: #F8F8FD;
+  color: var(--c-sub);
+}
 textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555570' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555570' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: right 13px center;
-  padding-right: 36px; cursor: pointer; }
+  padding-right: 36px; cursor: pointer;
+}
 .field .hint { font-size: 11px; color: var(--c-sub); margin-top: 4px; }
 
-/* ── 2列グリッド ── */
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-/* ── エントリーカード（モニタリング・CAPA） ── */
 .entry-card {
   background: #F8F8FD;
   border: 1px solid var(--c-border);
@@ -248,7 +244,6 @@ select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 }
 .add-btn:hover { border-color: var(--c-primary); color: var(--c-primary); }
 
-/* ── リスク選択 ── */
 .risk-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
 }
@@ -269,7 +264,6 @@ select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 .risk-opt.selected-高  { border-color: #E05000; background: #FFF2EA; }
 .risk-opt.selected-緊急 { border-color: var(--c-error); background: #FFF0F0; }
 
-/* ── ボトムナビ ── */
 .bottom-nav {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
   background: var(--c-surface);
@@ -297,6 +291,9 @@ select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   background: var(--c-primary); color: #fff;
 }
 .btn-next:hover  { background: var(--c-primary-l); }
+.btn-next:disabled {
+  background: #A0A0C0; cursor: not-allowed;
+}
 .btn-submit {
   flex: 1;
   background: var(--c-step4); color: #fff;
@@ -305,7 +302,6 @@ select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 .btn-submit:disabled{ background: #A0A0C0; cursor: not-allowed; }
 .btn-back:disabled  { opacity: .35; cursor: not-allowed; }
 
-/* ── 完了画面 ── */
 .done-screen {
   display: none; text-align: center;
   padding: 48px 24px;
@@ -324,7 +320,6 @@ select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
   border: none; cursor: pointer;
 }
 
-/* ── 設定パネル ── */
 .config-banner {
   background: #FFFBEB; border: 1px solid #D4A017;
   border-radius: var(--radius-md); padding: 14px 16px;
@@ -349,7 +344,6 @@ details[open] .config-arrow { transform: rotate(90deg); }
 .btn-sm-primary { background: var(--c-primary); color: #fff; }
 .btn-sm-ghost   { background: #F0F0F8; color: var(--c-sub); border: 1px solid var(--c-border); }
 
-/* ── トースト ── */
 #toast-wrap {
   position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
   z-index: 9999; display: flex; flex-direction: column; gap: 8px;
@@ -366,9 +360,8 @@ details[open] .config-arrow { transform: rotate(90deg); }
 @keyframes toastIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 .toast-success { background: var(--c-success); color: #fff; }
 .toast-error   { background: var(--c-error);   color: #fff; }
-.toast-info    { background: var(--c-primary);  color: #fff; }
+.toast-info    { background: var(--c-primary); color: #fff; }
 
-/* ── スピナー ── */
 .spin {
   display: inline-block; width: 16px; height: 16px;
   border: 2px solid rgba(255,255,255,.35);
@@ -377,10 +370,59 @@ details[open] .config-arrow { transform: rotate(90deg); }
 }
 @keyframes rotating { to { transform: rotate(360deg); } }
 
-/* ── スキップバナー ── */
 .skip-note {
   text-align: center; font-size: 12px; color: var(--c-sub);
   padding: 10px 0 4px;
+}
+
+.branch-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+.branch-row > *:first-child {
+  flex: 1;
+}
+.branch-reload-btn {
+  flex-shrink: 0;
+  min-width: 52px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--c-border);
+  background: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+.branch-reload-btn:hover {
+  border-color: var(--c-primary);
+  color: var(--c-primary);
+}
+.manual-branch-wrap {
+  margin-top: 10px;
+  display: none;
+}
+.manual-branch-wrap.visible {
+  display: block;
+}
+.branch-code-view {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--c-sub);
+  background: #F8F8FD;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+}
+
+.login-required-banner {
+  background: #EEF4FF;
+  border: 1px solid #8FB3FF;
+  color: #163A7A;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.6;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -390,7 +432,6 @@ details[open] .config-arrow { transform: rotate(90deg); }
 </head>
 <body>
 
-<!-- ── App Bar ── -->
 <header class="app-bar">
   <span style="font-size:18px;">⚖️</span>
   <span class="title">法令遵守週報</span>
@@ -399,7 +440,6 @@ details[open] .config-arrow { transform: rotate(90deg); }
   <button id="btn-signout" class="btn-auth" style="display:none;" onclick="signOut()">サインアウト</button>
 </header>
 
-<!-- ── Progress ── -->
 <nav class="progress-wrap" id="progress-wrap">
   <div class="progress-steps">
     <div class="step-node active" id="sn1" onclick="jumpTo(0)">
@@ -424,7 +464,6 @@ details[open] .config-arrow { transform: rotate(90deg); }
   </div>
 </nav>
 
-<!-- ── 完了画面 ── -->
 <div class="done-screen" id="done-screen">
   <div class="done-icon">✅</div>
   <h2>送信完了</h2>
@@ -432,13 +471,10 @@ details[open] .config-arrow { transform: rotate(90deg); }
   <button class="btn-again" onclick="resetAll()">🔄 新しい週報を入力</button>
 </div>
 
-<!-- ── ステップコンテナ ── -->
 <div class="view-port" id="view-port">
 
-  <!-- STEP 1: 基本情報 -->
   <div class="step-panel active" id="step-0">
 
-    <!-- 設定パネル -->
     <details class="config-banner" id="config-details">
       <summary>
         <span class="config-arrow">▶</span>
@@ -458,8 +494,12 @@ details[open] .config-arrow { transform: rotate(90deg); }
           <input type="text" id="cfg-site" placeholder="https://contoso.sharepoint.com/sites/QMS">
         </div>
         <div class="field">
-          <label>リスト名</label>
+          <label>週報リスト名</label>
           <input type="text" id="cfg-list" placeholder="WeeklyReport" value="WeeklyReport">
+        </div>
+        <div class="field">
+          <label>拠点マスタリスト名</label>
+          <input type="text" id="cfg-branch-list" placeholder="BranchMaster" value="BranchMaster">
         </div>
         <div class="config-actions">
           <button class="btn-sm btn-sm-primary" onclick="saveConfig()">💾 保存して再読み込み</button>
@@ -467,6 +507,10 @@ details[open] .config-arrow { transform: rotate(90deg); }
         </div>
       </div>
     </details>
+
+    <div class="login-required-banner" id="login-required-banner">
+      Microsoft 365 アカウントでサインインしてから入力してください。報告者氏名はログインユーザー名が自動表示されます。
+    </div>
 
     <div class="section-head">
       <div class="section-icon">📋</div>
@@ -490,19 +534,36 @@ details[open] .config-arrow { transform: rotate(90deg); }
     <div class="card">
       <div class="field">
         <label>拠点名 <span class="badge-req">必須</span></label>
-        <input type="text" id="f-branch" placeholder="例：東京本社">
+        <div class="branch-row">
+          <select id="f-branch" onchange="onBranchChange()">
+            <option value="">サインイン後に拠点一覧を取得します</option>
+          </select>
+          <button type="button" class="branch-reload-btn" onclick="loadBranchMaster(true)" title="拠点一覧を再取得">↻</button>
+        </div>
+        <div class="hint" id="branch-hint">拠点マスタから自動取得します</div>
+        <div class="branch-code-view" id="branch-code-view">拠点コード: －</div>
+
+        <div class="manual-branch-wrap" id="manual-branch-wrap">
+          <label style="margin-top:10px;">拠点名（手動入力）</label>
+          <input type="text" id="f-branch-manual" placeholder="例：東京本社">
+          <div class="field" style="margin-top:10px;">
+            <label>拠点コード（手動入力）</label>
+            <input type="text" id="f-branch-code-manual" placeholder="例：TOKYO-HQ">
+          </div>
+          <div class="hint">拠点マスタ取得失敗時のみ使用してください</div>
+        </div>
       </div>
+
       <div class="field">
         <label>報告者氏名 <span class="badge-req">必須</span></label>
-        <input type="text" id="f-reporter" placeholder="例：髙原 〇〇">
+        <input type="text" id="f-reporter" placeholder="サインイン後に自動表示" readonly>
+        <div class="hint">Microsoft 365 のログインユーザー名を自動表示します</div>
       </div>
     </div>
 
   </div>
 
-  <!-- STEP 2: 法令モニタリング -->
   <div class="step-panel" id="step-1">
-
     <div class="section-head">
       <div class="section-icon s2">📡</div>
       <div class="section-title">
@@ -522,12 +583,9 @@ details[open] .config-arrow { transform: rotate(90deg); }
     </div>
 
     <p class="skip-note">今週の該当なし → そのまま「次へ」</p>
-
   </div>
 
-  <!-- STEP 3: 不適合・CAPA -->
   <div class="step-panel" id="step-2">
-
     <div class="section-head">
       <div class="section-icon s3">🔧</div>
       <div class="section-title">
@@ -556,12 +614,9 @@ details[open] .config-arrow { transform: rotate(90deg); }
     </div>
 
     <p class="skip-note">今週の該当なし → そのまま「次へ」</p>
-
   </div>
 
-  <!-- STEP 4: 特記事項・確認・送信 -->
   <div class="step-panel" id="step-3">
-
     <div class="section-head">
       <div class="section-icon s4">📝</div>
       <div class="section-title">
@@ -585,25 +640,25 @@ details[open] .config-arrow { transform: rotate(90deg); }
     <div class="card">
       <div class="card-label">総合リスク評価 <span class="badge-req">必須</span></div>
       <div class="risk-grid" id="risk-grid">
-        <label class="risk-opt" onclick="selectRisk('低')">
+        <label class="risk-opt" onclick="selectRisk(this, '低')">
           <input type="radio" name="risk" value="低">
           <span class="risk-icon">🟢</span>
           <span class="risk-label">低</span>
           <span class="risk-desc">通常運用継続</span>
         </label>
-        <label class="risk-opt" onclick="selectRisk('中')">
+        <label class="risk-opt" onclick="selectRisk(this, '中')">
           <input type="radio" name="risk" value="中">
           <span class="risk-icon">🟡</span>
           <span class="risk-label">中</span>
           <span class="risk-desc">注意・経過観察</span>
         </label>
-        <label class="risk-opt" onclick="selectRisk('高')">
+        <label class="risk-opt" onclick="selectRisk(this, '高')">
           <input type="radio" name="risk" value="高">
           <span class="risk-icon">🔴</span>
           <span class="risk-label">高</span>
           <span class="risk-desc">速やかな対応要</span>
         </label>
-        <label class="risk-opt" onclick="selectRisk('緊急')">
+        <label class="risk-opt" onclick="selectRisk(this, '緊急')">
           <input type="radio" name="risk" value="緊急">
           <span class="risk-icon">🚨</span>
           <span class="risk-label">緊急</span>
@@ -611,305 +666,623 @@ details[open] .config-arrow { transform: rotate(90deg); }
         </label>
       </div>
     </div>
-
   </div>
 
-</div><!-- /view-port -->
+</div>
 
-<!-- ── Bottom Nav ── -->
 <div class="bottom-nav" id="bottom-nav">
   <button class="btn-back" id="btn-back" onclick="goBack()" disabled>‹</button>
-  <button class="btn-next" id="btn-next" onclick="goNext()">次へ ›</button>
+  <button class="btn-next" id="btn-next" onclick="goNext()" disabled>次へ ›</button>
   <button class="btn-submit" id="btn-submit" style="display:none;" onclick="submitReport()" disabled>
     <span id="submit-label">📤 送信</span>
   </button>
 </div>
 
-<!-- ── Toast ── -->
 <div id="toast-wrap"></div>
 
 <script>
-/* ===== 設定管理 ===== */
 const CFG_KEY = 'weekly_report_cfg';
-function loadCfg() { try { return JSON.parse(localStorage.getItem(CFG_KEY))||{}; } catch(e){return{};} }
+
+let msalInstance = null;
+let account = null;
+let currentStep = 0;
+const STEPS = 4;
+let mId = 0;
+let cId = 0;
+let branchMasterLoaded = false;
+
+function loadCfg() {
+  try {
+    return JSON.parse(localStorage.getItem(CFG_KEY)) || {};
+  } catch(e) {
+    return {};
+  }
+}
+
 function saveConfig() {
   const c = {
-    tenantId: v('cfg-tenant'), clientId: v('cfg-client'),
-    siteUrl:  v('cfg-site').replace(/\/$/,''), listName: v('cfg-list'),
+    tenantId: v('cfg-tenant'),
+    clientId: v('cfg-client'),
+    siteUrl: v('cfg-site').replace(/\/$/,''),
+    listName: v('cfg-list'),
+    branchListName: v('cfg-branch-list') || 'BranchMaster',
   };
-  if (!c.tenantId||!c.clientId||!c.siteUrl||!c.listName) { toast('すべての設定項目を入力してください','error'); return; }
+  if (!c.tenantId || !c.clientId || !c.siteUrl || !c.listName) {
+    toast('すべての設定項目を入力してください','error');
+    return;
+  }
   localStorage.setItem(CFG_KEY, JSON.stringify(c));
   toast('設定を保存しました。再読み込みします…','success');
   setTimeout(()=>location.reload(), 1500);
 }
-function clearConfig() { localStorage.removeItem(CFG_KEY); toast('設定をクリアしました','info'); setTimeout(()=>location.reload(),1000); }
+
+function clearConfig() {
+  localStorage.removeItem(CFG_KEY);
+  toast('設定をクリアしました','info');
+  setTimeout(()=>location.reload(),1000);
+}
+
 function applyCfgUI() {
   const c = loadCfg();
-  set('cfg-tenant', c.tenantId||''); set('cfg-client', c.clientId||'');
-  set('cfg-site', c.siteUrl||'');   set('cfg-list', c.listName||'WeeklyReport');
+  set('cfg-tenant', c.tenantId || '');
+  set('cfg-client', c.clientId || '');
+  set('cfg-site', c.siteUrl || '');
+  set('cfg-list', c.listName || 'WeeklyReport');
+  set('cfg-branch-list', c.branchListName || 'BranchMaster');
 }
-function v(id)   { return (document.getElementById(id)||{}).value||''; }
-function set(id,val) { const el=document.getElementById(id); if(el) el.value=val; }
 
-/* ===== MSAL (Popup方式 — SiteAssets直リンク用) ===== */
-let msalInstance=null, account=null;
+function v(id) {
+  return (document.getElementById(id) || {}).value || '';
+}
+
+function set(id,val) {
+  const el = document.getElementById(id);
+  if (el) el.value = val;
+}
+
+function escapeHtml(str='') {
+  return String(str)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function escapeAttr(str='') {
+  return escapeHtml(str);
+}
+
+function toast(msg, type='info') {
+  const icons = { success:'✅', error:'❌', info:'ℹ️' };
+  const el = document.createElement('div');
+  el.className = `toast toast-${type}`;
+  el.innerHTML = `<span>${icons[type]}</span><span>${escapeHtml(msg)}</span>`;
+  document.getElementById('toast-wrap').appendChild(el);
+  setTimeout(()=>el.remove(), 4500);
+}
+
+function setBranchHint(msg) {
+  const el = document.getElementById('branch-hint');
+  if (el) el.textContent = msg;
+}
+
+function showManualBranch(enable) {
+  const wrap = document.getElementById('manual-branch-wrap');
+  if (!wrap) return;
+  wrap.classList.toggle('visible', !!enable);
+}
+
+function setBranchCodeView(code) {
+  const el = document.getElementById('branch-code-view');
+  if (!el) return;
+  el.textContent = `拠点コード: ${code || '－'}`;
+}
+
+function getBranchName() {
+  return v('f-branch') || v('f-branch-manual').trim();
+}
+
+function getBranchCode() {
+  const select = document.getElementById('f-branch');
+  const selectedOption = select ? select.options[select.selectedIndex] : null;
+  const codeFromMaster = selectedOption ? (selectedOption.dataset.code || '') : '';
+  return codeFromMaster || v('f-branch-code-manual').trim();
+}
+
+function onBranchChange() {
+  setBranchCodeView(getBranchCode());
+}
+
+function getMonday(d) {
+  const dt = new Date(d);
+  const dy = dt.getDay();
+  dt.setDate(dt.getDate() + (dy === 0 ? -6 : 1 - dy));
+  return dt;
+}
+
+function fmt(d) {
+  return d.toISOString().slice(0,10);
+}
+
+function initDates() {
+  const mon = getMonday(new Date());
+  const fri = new Date(mon);
+  fri.setDate(mon.getDate() + 4);
+  set('f-week-start', fmt(mon));
+  set('f-week-end', fmt(fri));
+}
+
+function setUiSignedInState(isSignedIn) {
+  const nextBtn = document.getElementById('btn-next');
+  const submitBtn = document.getElementById('btn-submit');
+  const banner = document.getElementById('login-required-banner');
+
+  if (nextBtn) nextBtn.disabled = !isSignedIn;
+  if (submitBtn) submitBtn.disabled = !isSignedIn;
+  if (banner) banner.style.display = isSignedIn ? 'none' : 'block';
+}
+
 function initMsal() {
   const c = loadCfg();
-  if (!c.tenantId||!c.clientId) {
+  if (!c.tenantId || !c.clientId) {
     document.getElementById('btn-signin').style.display='inline-block';
+    setUiSignedInState(false);
     return;
   }
+
   msalInstance = new msal.PublicClientApplication({
     auth: {
-      clientId:    c.clientId,
-      authority:   `https://login.microsoftonline.com/${c.tenantId}`,
-      // SiteAssets直リンクのため redirectUri は不要（Popup方式）
+      clientId: c.clientId,
+      authority: `https://login.microsoftonline.com/${c.tenantId}`,
     },
     cache: { cacheLocation:'sessionStorage', storeAuthStateInCookie:false },
   });
-  msalInstance.initialize().then(()=>{
-    // Popup方式ではhandleRedirectPromiseは不要だが念のため呼ぶ
+
+  msalInstance.initialize().then(async ()=>{
     msalInstance.handleRedirectPromise().catch(()=>{});
     const accounts = msalInstance.getAllAccounts();
     if (accounts.length > 0) {
       account = accounts[0];
-      showSignedIn();
+      await showSignedIn();
     } else {
       showLogin();
     }
+  }).catch(e=>{
+    console.error(e);
+    toast('MSAL初期化に失敗しました','error');
+    showLogin();
   });
 }
-function showSignedIn() {
+
+async function showSignedIn() {
   const pill = document.getElementById('user-pill');
   pill.textContent = account.name || account.username;
   pill.style.display = 'block';
   document.getElementById('btn-signout').style.display = 'inline-block';
   document.getElementById('btn-signin').style.display  = 'none';
-  document.getElementById('btn-submit').disabled = false;
-  const r = document.getElementById('f-reporter');
-  if (r && !r.value) r.value = account.name || '';
+
+  set('f-reporter', account.name || account.username || '');
+
+  await loadBranchMaster(false);
+  setUiSignedInState(true);
+  refreshSubmitState();
 }
+
 function showLogin() {
   document.getElementById('btn-signin').style.display  = 'inline-block';
   document.getElementById('btn-signout').style.display = 'none';
-  document.getElementById('btn-submit').disabled = true;
+
+  const pill = document.getElementById('user-pill');
+  pill.style.display = 'none';
+
+  set('f-reporter', '');
+
+  const branch = document.getElementById('f-branch');
+  if (branch) {
+    branch.innerHTML = '<option value="">サインイン後に拠点一覧を取得します</option>';
+  }
+  setBranchHint('拠点マスタを取得するにはサインインしてください');
+  setBranchCodeView('');
+  showManualBranch(false);
+  branchMasterLoaded = false;
+
+  setUiSignedInState(false);
 }
+
 async function signIn() {
-  if (!msalInstance) { toast('先に接続設定を保存してください','error'); return; }
+  if (!msalInstance) {
+    toast('先に接続設定を保存してください','error');
+    return;
+  }
   try {
     const res = await msalInstance.loginPopup({ scopes: ['Sites.ReadWrite.All'] });
     account = res.account;
-    showSignedIn();
+    await showSignedIn();
   } catch(e) {
-    if (e.errorCode !== 'user_cancelled') toast('サインインに失敗しました: ' + e.message, 'error');
+    if (e.errorCode !== 'user_cancelled') {
+      toast('サインインに失敗しました: ' + e.message, 'error');
+    }
   }
 }
+
 async function signOut() {
   if (!msalInstance) return;
-  await msalInstance.logoutPopup({ account });
+  try {
+    await msalInstance.logoutPopup({ account });
+  } catch(e) {
+    console.error(e);
+  }
   account = null;
   showLogin();
-  document.getElementById('user-pill').style.display = 'none';
 }
+
 async function getToken() {
   const req = { account, scopes: ['Sites.ReadWrite.All'] };
-  try { return (await msalInstance.acquireTokenSilent(req)).accessToken; }
-  catch(e) { return (await msalInstance.acquireTokenPopup(req)).accessToken; }
+  try {
+    return (await msalInstance.acquireTokenSilent(req)).accessToken;
+  } catch(e) {
+    return (await msalInstance.acquireTokenPopup(req)).accessToken;
+  }
 }
 
-/* ===== 日付 ===== */
-function getMonday(d) { const dt=new Date(d); const dy=dt.getDay(); dt.setDate(dt.getDate()+(dy===0?-6:1-dy)); return dt; }
-function fmt(d) { return d.toISOString().slice(0,10); }
-function initDates() {
-  const mon=getMonday(new Date()); const fri=new Date(mon); fri.setDate(mon.getDate()+4);
-  set('f-week-start', fmt(mon)); set('f-week-end', fmt(fri));
+async function getSiteAndListIds(token, cfg, listName) {
+  const siteHost = new URL(cfg.siteUrl).host;
+  const sitePath = new URL(cfg.siteUrl).pathname;
+
+  const siteRes = await fetch(`https://graph.microsoft.com/v1.0/sites/${siteHost}:${sitePath}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  const siteData = await siteRes.json();
+  if (!siteData.id) throw new Error('サイト取得失敗');
+
+  const listRes = await fetch(`https://graph.microsoft.com/v1.0/sites/${siteData.id}/lists/${encodeURIComponent(listName)}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  const listData = await listRes.json();
+  if (!listData.id) throw new Error(`リスト「${listName}」が見つかりません`);
+
+  return {
+    siteId: siteData.id,
+    listId: listData.id
+  };
 }
 
-/* ===== ステップ管理 ===== */
-let currentStep=0;
-const STEPS=4;
+async function loadBranchMaster(showToastOnSuccess = false) {
+  const cfg = loadCfg();
+  const select = document.getElementById('f-branch');
+  if (!select) return;
+
+  select.innerHTML = '<option value="">拠点一覧を読み込み中…</option>';
+  setBranchHint('拠点マスタを読み込み中です');
+  setBranchCodeView('');
+  showManualBranch(false);
+  branchMasterLoaded = false;
+
+  if (!cfg.siteUrl || !cfg.branchListName) {
+    select.innerHTML = '<option value="">設定未完了</option>';
+    setBranchHint('接続設定にサイトURLと拠点マスタリスト名を入力してください');
+    showManualBranch(true);
+    return;
+  }
+
+  if (!account) {
+    select.innerHTML = '<option value="">サインイン後に拠点一覧を取得します</option>';
+    setBranchHint('拠点マスタを取得するにはサインインしてください');
+    return;
+  }
+
+  try {
+    const token = await getToken();
+    const ids = await getSiteAndListIds(token, cfg, cfg.branchListName);
+
+    const res = await fetch(
+      `https://graph.microsoft.com/v1.0/sites/${ids.siteId}/lists/${ids.listId}/items?expand=fields&$top=999`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    const data = await res.json();
+
+    if (!Array.isArray(data.value)) {
+      throw new Error('拠点マスタ取得失敗');
+    }
+
+    const rows = data.value
+      .map(x => x.fields || {})
+      .filter(f => f.Title && (f.IsActive !== false))
+      .sort((a, b) => {
+        const sa = Number.isFinite(Number(a.SortOrder)) ? Number(a.SortOrder) : 9999;
+        const sb = Number.isFinite(Number(b.SortOrder)) ? Number(b.SortOrder) : 9999;
+        return sa - sb;
+      });
+
+    select.innerHTML = '<option value="">── 拠点を選択 ──</option>';
+
+    rows.forEach(b => {
+      const opt = document.createElement('option');
+      opt.value = b.Title;
+      opt.textContent = b.Title + (b.BranchCode ? ` (${b.BranchCode})` : '');
+      opt.dataset.code = b.BranchCode || '';
+      select.appendChild(opt);
+    });
+
+    branchMasterLoaded = true;
+    setBranchHint(rows.length ? '拠点マスタから自動取得しました' : '有効な拠点がありません');
+    showManualBranch(rows.length === 0);
+    setBranchCodeView('');
+
+    if (showToastOnSuccess) {
+      toast('拠点一覧を更新しました','success');
+    }
+  } catch(e) {
+    console.error(e);
+    select.innerHTML = '<option value="">拠点一覧の取得に失敗しました</option>';
+    setBranchHint('取得失敗時は下の手動入力欄を使用できます');
+    setBranchCodeView('');
+    showManualBranch(true);
+    branchMasterLoaded = false;
+    toast(`拠点マスタ読込エラー: ${e.message}`, 'error');
+  }
+}
+
 function updateProgress() {
   for(let i=0;i<STEPS;i++) {
     const node=document.getElementById(`sn${i+1}`);
     node.className='step-node'+(i===currentStep?' active':i<currentStep?' done':'');
-    if(i<STEPS-1) document.getElementById(`sc${i+1}`).className='step-connector'+(i<currentStep?' done':'');
+    if(i<STEPS-1) {
+      document.getElementById(`sc${i+1}`).className='step-connector'+(i<currentStep?' done':'');
+    }
   }
   document.getElementById('btn-back').disabled=(currentStep===0);
   const isLast=(currentStep===STEPS-1);
   document.getElementById('btn-next').style.display   =isLast?'none':'flex';
   document.getElementById('btn-submit').style.display =isLast?'flex':'none';
+  refreshSubmitState();
 }
+
 function showStep(next, dir) {
   const cur=document.getElementById(`step-${currentStep}`);
   const nxt=document.getElementById(`step-${next}`);
   const outClass=dir>0?'slide-out-left':'slide-out-right';
   const inClass =dir>0?'slide-in-right':'slide-in-left';
+
   cur.className=`step-panel ${outClass}`;
-  setTimeout(()=>{ cur.className='step-panel'; cur.style.display='none'; },280);
+  setTimeout(()=>{
+    cur.className='step-panel';
+    cur.style.display='none';
+  },280);
+
   nxt.style.display='block';
   nxt.className=`step-panel active ${inClass}`;
-  setTimeout(()=>{ nxt.className='step-panel active'; },280);
+  setTimeout(()=>{
+    nxt.className='step-panel active';
+  },280);
+
   currentStep=next;
   updateProgress();
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
 function goNext() {
   if(!validateStep()) return;
   if(currentStep<STEPS-1) showStep(currentStep+1,1);
 }
-function goBack() { if(currentStep>0) showStep(currentStep-1,-1); }
-function jumpTo(idx) { if(idx<currentStep) showStep(idx,-1); }
+
+function goBack() {
+  if(currentStep>0) showStep(currentStep-1,-1);
+}
+
+function jumpTo(idx) {
+  if(idx<currentStep) showStep(idx,-1);
+}
 
 function validateStep() {
-  if(currentStep===0) {
-    if(!v('f-week-start')) { toast('報告週（開始日）を入力してください','error'); return false; }
-    if(!v('f-week-end'))   { toast('報告週（終了日）を入力してください','error'); return false; }
-    if(!v('f-branch'))     { toast('拠点名を入力してください','error'); return false; }
-    if(!v('f-reporter'))   { toast('報告者氏名を入力してください','error'); return false; }
+  if (!account) {
+    toast('Microsoft 365 アカウントでサインインしてください','error');
+    return false;
   }
+
+  if(currentStep===0) {
+    if(!v('f-week-start')) {
+      toast('報告週（開始日）を入力してください','error');
+      return false;
+    }
+    if(!v('f-week-end')) {
+      toast('報告週（終了日）を入力してください','error');
+      return false;
+    }
+    if(!getBranchName()) {
+      toast('拠点名を入力または選択してください','error');
+      return false;
+    }
+    if(!v('f-reporter')) {
+      toast('報告者氏名を取得できません。再度サインインしてください','error');
+      return false;
+    }
+  }
+
   if(currentStep===3) {
     const sel=document.querySelector('input[name="risk"]:checked');
-    if(!sel) { toast('総合リスク評価を選択してください','error'); return false; }
-    if(!account) { toast('Microsoftアカウントでサインインしてください','error'); return false; }
+    if(!sel) {
+      toast('総合リスク評価を選択してください','error');
+      return false;
+    }
   }
   return true;
 }
 
-/* ===== リスク選択 ===== */
-function selectRisk(val) {
-  document.querySelectorAll('.risk-opt').forEach(el=>{
-    const cls=[...el.classList].filter(c=>c.startsWith('selected-'));
-    cls.forEach(c=>el.classList.remove(c));
-  });
-  event.currentTarget.classList.add(`selected-${val}`);
-  const radio=event.currentTarget.querySelector('input[type="radio"]');
-  if(radio) radio.checked=true;
+function refreshSubmitState() {
+  const submitBtn = document.getElementById('btn-submit');
+  const nextBtn = document.getElementById('btn-next');
+
+  if (nextBtn && currentStep !== 3) {
+    nextBtn.disabled = !account;
+  }
+  if (submitBtn && currentStep === 3) {
+    submitBtn.disabled = !account;
+  }
 }
 
-/* ===== モニタリングカード ===== */
-let mId=0;
+function selectRisk(el, val) {
+  document.querySelectorAll('.risk-opt').forEach(x=>{
+    [...x.classList]
+      .filter(c=>c.startsWith('selected-'))
+      .forEach(c=>x.classList.remove(c));
+  });
+  el.classList.add(`selected-${val}`);
+  const radio = el.querySelector('input[type="radio"]');
+  if (radio) radio.checked = true;
+}
+
 function addMonitorCard(d={}) {
   const id=++mId;
   const wrap=document.getElementById('monitor-list');
   const div=document.createElement('div');
-  div.className='entry-card'; div.id=`mc-${id}`;
+  div.className='entry-card';
+  div.id=`mc-${id}`;
   div.innerHTML=`
     <div class="entry-num">通知 #${id}</div>
     <button class="entry-delete" onclick="document.getElementById('mc-${id}').remove()" title="削除">×</button>
     <div class="field">
       <label>発出日</label>
-      <input type="date" id="md-${id}" value="${d.date||''}">
+      <input type="date" id="md-${id}" value="${escapeAttr(d.date||'')}">
     </div>
     <div class="field">
       <label>発出元</label>
       <select id="ms-${id}">
         <option value="">── 選択 ──</option>
-        ${['厚生労働省','PMDA','農林水産省','都道府県','市区町村','その他'].map(s=>`<option value="${s}" ${d.src===s?'selected':''}>${s}</option>`).join('')}
+        ${['厚生労働省','PMDA','農林水産省','都道府県','市区町村','その他'].map(s=>`<option value="${escapeAttr(s)}" ${d.src===s?'selected':''}>${escapeHtml(s)}</option>`).join('')}
       </select>
     </div>
     <div class="field">
       <label>通知タイトル・改正名</label>
-      <input type="text" id="mt-${id}" placeholder="例：薬機法施行規則一部改正" value="${d.title||''}">
+      <input type="text" id="mt-${id}" placeholder="例：薬機法施行規則一部改正" value="${escapeAttr(d.title||'')}">
     </div>
     <div class="field">
       <label>対応状況</label>
       <select id="mst-${id}">
-        ${['確認中','対応要','対応済','影響なし'].map(s=>`<option value="${s}" ${d.status===s?'selected':''}>${s}</option>`).join('')}
+        ${['確認中','対応要','対応済','影響なし'].map(s=>`<option value="${escapeAttr(s)}" ${d.status===s?'selected':''}>${escapeHtml(s)}</option>`).join('')}
       </select>
     </div>`;
   wrap.appendChild(div);
 }
+
 function getMonitorData() {
   return [...document.querySelectorAll('#monitor-list .entry-card')].map(c=>{
     const i=c.id.replace('mc-','');
-    return { date:v(`md-${i}`), src:v(`ms-${i}`), title:v(`mt-${i}`), status:v(`mst-${i}`) };
+    return {
+      date:v(`md-${i}`),
+      src:v(`ms-${i}`),
+      title:v(`mt-${i}`),
+      status:v(`mst-${i}`)
+    };
   });
 }
 
-/* ===== CAPAカード ===== */
-let cId=0;
 function addCapaCard(d={}) {
   const id=++cId;
   const wrap=document.getElementById('capa-list');
   const div=document.createElement('div');
-  div.className='entry-card'; div.id=`cc-${id}`;
+  div.className='entry-card';
+  div.id=`cc-${id}`;
   div.innerHTML=`
     <div class="entry-num">案件 #${id}</div>
     <button class="entry-delete" onclick="document.getElementById('cc-${id}').remove()" title="削除">×</button>
     <div class="field">
       <label>管理番号</label>
-      <input type="text" id="cn-${id}" placeholder="CAPA-2025-001" value="${d.num||''}">
+      <input type="text" id="cn-${id}" placeholder="CAPA-2025-001" value="${escapeAttr(d.num||'')}">
     </div>
     <div class="field">
       <label>区分</label>
       <select id="ct-${id}">
-        ${['不適合','逸脱','CAPA','観察事項'].map(s=>`<option value="${s}" ${d.type===s?'selected':''}>${s}</option>`).join('')}
+        ${['不適合','逸脱','CAPA','観察事項'].map(s=>`<option value="${escapeAttr(s)}" ${d.type===s?'selected':''}>${escapeHtml(s)}</option>`).join('')}
       </select>
     </div>
     <div class="field">
       <label>件名・概要</label>
-      <input type="text" id="ctt-${id}" placeholder="件名を入力" value="${d.title||''}">
+      <input type="text" id="ctt-${id}" placeholder="件名を入力" value="${escapeAttr(d.title||'')}">
     </div>
     <div class="field">
       <label>ステータス</label>
       <select id="cs-${id}">
-        ${['調査中','対策立案中','実施中','有効性確認','完了'].map(s=>`<option value="${s}" ${d.status===s?'selected':''}>${s}</option>`).join('')}
+        ${['調査中','対策立案中','実施中','有効性確認','完了'].map(s=>`<option value="${escapeAttr(s)}" ${d.status===s?'selected':''}>${escapeHtml(s)}</option>`).join('')}
       </select>
     </div>
     <div class="field">
       <label>今週の進捗・対応内容</label>
-      <textarea id="cp-${id}" rows="2" placeholder="今週の進捗を入力">${d.progress||''}</textarea>
+      <textarea id="cp-${id}" rows="2" placeholder="今週の進捗を入力">${escapeHtml(d.progress||'')}</textarea>
     </div>
     <div class="field">
       <label>対応期限</label>
-      <input type="date" id="cd-${id}" value="${d.due||''}">
+      <input type="date" id="cd-${id}" value="${escapeAttr(d.due||'')}">
     </div>`;
   wrap.appendChild(div);
 }
+
 function getCapaData() {
   return [...document.querySelectorAll('#capa-list .entry-card')].map(c=>{
     const i=c.id.replace('cc-','');
-    return { num:v(`cn-${i}`), type:v(`ct-${i}`), title:v(`ctt-${i}`), status:v(`cs-${i}`), progress:v(`cp-${i}`), due:v(`cd-${i}`) };
+    return {
+      num:v(`cn-${i}`),
+      type:v(`ct-${i}`),
+      title:v(`ctt-${i}`),
+      status:v(`cs-${i}`),
+      progress:v(`cp-${i}`),
+      due:v(`cd-${i}`)
+    };
   });
 }
 
-/* ===== 送信 ===== */
 async function submitReport() {
   if(!validateStep()) return;
+
   const btn=document.getElementById('btn-submit');
   const lbl=document.getElementById('submit-label');
   btn.disabled=true;
   lbl.innerHTML='<span class="spin"></span> 送信中…';
+
   try {
     const token=await getToken();
     const cfg=loadCfg();
-    const siteHost=new URL(cfg.siteUrl).host;
-    const sitePath=new URL(cfg.siteUrl).pathname;
-    const siteData=await (await fetch(`https://graph.microsoft.com/v1.0/sites/${siteHost}:${sitePath}`,{headers:{Authorization:`Bearer ${token}`}})).json();
-    if(!siteData.id) throw new Error('サイト取得失敗');
-    const listData=await (await fetch(`https://graph.microsoft.com/v1.0/sites/${siteData.id}/lists/${encodeURIComponent(cfg.listName)}`,{headers:{Authorization:`Bearer ${token}`}})).json();
-    if(!listData.id) throw new Error(`リスト「${cfg.listName}」が見つかりません`);
-    const risk=document.querySelector('input[name="risk"]:checked')?.value||'';
+    const ids = await getSiteAndListIds(token, cfg, cfg.listName);
+
+    const risk=document.querySelector('input[name="risk"]:checked')?.value || '';
+    const branchName = getBranchName();
+    const branchCode = getBranchCode();
+    const reporterName = account?.name || account?.username || '';
+
     const fields={
-      Title:`週報_${v('f-branch')}_${v('f-week-start')}`,
-      WeekStart:v('f-week-start'), WeekEnd:v('f-week-end'),
-      Branch:v('f-branch'), Reporter:v('f-reporter'),
+      Title:`週報_${branchName}_${v('f-week-start')}`,
+      WeekStart:v('f-week-start'),
+      WeekEnd:v('f-week-end'),
+      Branch:branchName,
+      BranchCode:branchCode,
+      Reporter:reporterName,
       MonitoringData:JSON.stringify(getMonitorData()),
       MonitoringNote:v('f-monitor-note'),
       CapaData:JSON.stringify(getCapaData()),
       NcNewCount:parseInt(v('f-nc-new'))||0,
       CapaDoneCount:parseInt(v('f-capa-done'))||0,
-      Opinion:v('f-opinion'), NextAction:v('f-action'),
+      Opinion:v('f-opinion'),
+      NextAction:v('f-action'),
       RiskLevel:risk,
       SubmittedAt:new Date().toISOString(),
       SubmittedBy:account.username,
     };
-    const res=await fetch(`https://graph.microsoft.com/v1.0/sites/${siteData.id}/lists/${listData.id}/items`,{
-      method:'POST', headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},
+
+    const res=await fetch(`https://graph.microsoft.com/v1.0/sites/${ids.siteId}/lists/${ids.listId}/items`,{
+      method:'POST',
+      headers:{
+        Authorization:`Bearer ${token}`,
+        'Content-Type':'application/json'
+      },
       body:JSON.stringify({fields}),
     });
-    if(!res.ok) { const t=await res.text(); throw new Error(`${res.status}: ${t}`); }
-    // 完了画面
+
+    if(!res.ok) {
+      const t=await res.text();
+      throw new Error(`${res.status}: ${t}`);
+    }
+
     document.getElementById('view-port').style.display='none';
     document.getElementById('progress-wrap').style.display='none';
     document.getElementById('bottom-nav').style.display='none';
@@ -922,49 +1295,63 @@ async function submitReport() {
   }
 }
 
-/* ===== リセット ===== */
 function resetAll() {
   document.getElementById('view-port').style.display='';
   document.getElementById('progress-wrap').style.display='';
   document.getElementById('bottom-nav').style.display='';
   document.getElementById('done-screen').className='done-screen';
+
   document.getElementById('monitor-list').innerHTML='';
   document.getElementById('capa-list').innerHTML='';
-  mId=0; cId=0;
-  document.getElementById('f-branch').value='';
-  document.getElementById('f-monitor-note').value='';
-  document.getElementById('f-nc-new').value='';
-  document.getElementById('f-capa-done').value='';
-  document.getElementById('f-opinion').value='';
-  document.getElementById('f-action').value='';
+  mId=0;
+  cId=0;
+
+  const branchSel = document.getElementById('f-branch');
+  if (branchSel) branchSel.value = '';
+  set('f-branch-manual','');
+  set('f-branch-code-manual','');
+  setBranchCodeView('');
+  set('f-reporter', account?.name || account?.username || '');
+  set('f-monitor-note','');
+  set('f-nc-new','');
+  set('f-capa-done','');
+  set('f-opinion','');
+  set('f-action','');
+
   document.querySelectorAll('.risk-opt').forEach(el=>{
-    el.className=el.className.replace(/selected-\S+/,'').trim();
-    const r=el.querySelector('input[type="radio"]');
+    el.className = [...el.classList].filter(c=>!c.startsWith('selected-')).join(' ');
+    const r = el.querySelector('input[type="radio"]');
     if(r) r.checked=false;
   });
+
   currentStep=0;
-  document.querySelectorAll('.step-panel').forEach((p,i)=>{ p.style.display=''; p.className='step-panel'+(i===0?' active':''); });
+  document.querySelectorAll('.step-panel').forEach((p,i)=>{
+    p.style.display='';
+    p.className='step-panel'+(i===0?' active':'');
+  });
+
   initDates();
   updateProgress();
+  if (account) loadBranchMaster(false);
+  setUiSignedInState(!!account);
   window.scrollTo({top:0});
 }
 
-/* ===== トースト ===== */
-function toast(msg, type='info') {
-  const icons={success:'✅',error:'❌',info:'ℹ️'};
-  const el=document.createElement('div');
-  el.className=`toast toast-${type}`;
-  el.innerHTML=`<span>${icons[type]}</span><span>${msg}</span>`;
-  document.getElementById('toast-wrap').appendChild(el);
-  setTimeout(()=>el.remove(), 4500);
-}
-
-/* ===== 初期化 ===== */
 window.addEventListener('DOMContentLoaded', ()=>{
   applyCfgUI();
   initDates();
   updateProgress();
   initMsal();
+
+  const manualCode = document.getElementById('f-branch-code-manual');
+  if (manualCode) {
+    manualCode.addEventListener('input', ()=>setBranchCodeView(getBranchCode()));
+  }
+
+  const manualName = document.getElementById('f-branch-manual');
+  if (manualName) {
+    manualName.addEventListener('input', ()=>setBranchCodeView(getBranchCode()));
+  }
 });
 </script>
 </body>
